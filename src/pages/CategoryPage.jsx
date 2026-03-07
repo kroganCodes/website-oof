@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './HomePage.css';
 import NavBar from './navbar';
 
 const FALLBACK_POSTER = '/logo192.png';
-const CATEGORY_SECTIONS = [
-  { slug: 'anime', title: 'Anime', mediaType: 'Anime' },
-  { slug: 'movies', title: 'Movies', mediaType: 'Movies' },
-  { slug: 'tv-series', title: 'TV Series', mediaType: 'TV_series' },
-];
+const CATEGORY_MAP = {
+  anime: { title: 'Anime', mediaType: 'Anime' },
+  movies: { title: 'Movies', mediaType: 'Movies' },
+  'tv-series': { title: 'TV Series', mediaType: 'TV_series' },
+};
 
 function getRating(value) {
   return typeof value === 'number' ? value.toFixed(1) : 'N/A';
@@ -18,7 +18,9 @@ function sortByRating(items) {
   return [...items].sort((a, b) => (b.average_rating || 0) - (a.average_rating || 0));
 }
 
-function HomePage() {
+export default function CategoryPage() {
+  const { categoryKey } = useParams();
+  const category = CATEGORY_MAP[categoryKey];
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,17 +38,12 @@ function HomePage() {
         console.error('Error fetching media:', err);
         setLoading(false);
       });
-  }, []);
+  }, [categoryKey]);
 
-  const sections = useMemo(
-    () => CATEGORY_SECTIONS
-      .map((section) => ({
-        ...section,
-        items: sortByRating(media.filter((item) => item.media === section.mediaType)).slice(0, 5),
-      }))
-      .filter((section) => section.items.length > 0),
-    [media]
-  );
+  const items = useMemo(() => {
+    if (!category) return [];
+    return sortByRating(media.filter((item) => item.media === category.mediaType));
+  }, [category, media]);
 
   return (
     <div className="homepage-dark catalog-homepage">
@@ -54,28 +51,48 @@ function HomePage() {
 
       <main className="catalog-main">
         <div className="catalog-container">
-          {loading ? (
-            <div className="catalog-loading">Loading your library...</div>
-          ) : sections.length === 0 ? (
+          {!category ? (
             <div className="catalog-empty-state">
-              <h2>Your library is waiting</h2>
-              <p>No media items found yet. Add a title to start building these category shelves.</p>
-              <Link to="/addmedia" className="catalog-secondary-link">
-                Add Media
+              <h2>Category not found</h2>
+              <p>The category you requested does not exist.</p>
+              <Link to="/home" className="catalog-secondary-link">
+                Back home
               </Link>
             </div>
+          ) : loading ? (
+            <div className="catalog-loading">Loading {category.title.toLowerCase()}...</div>
           ) : (
-            sections.map((section) => (
-              <section className="catalog-section" key={section.slug}>
-                <div className="catalog-section-header">
-                  <h2>{section.title}</h2>
-                  <Link to={`/categories/${section.slug}`} className="catalog-view-all">
-                    View all
-                  </Link>
+            <>
+              <div className="category-page-header">
+                <div>
+                  <p className="category-page-kicker">View all</p>
+                  <h1>{category.title}</h1>
+                  <p>
+                    {items.length} {items.length === 1 ? 'title' : 'titles'} in this category.
+                  </p>
                 </div>
 
-                <div className="catalog-card-row">
-                  {section.items.map((item) => (
+                <div className="category-header-actions">
+                  <Link to="/home" className="catalog-secondary-link">
+                    Back home
+                  </Link>
+                  <Link to="/top100" className="catalog-secondary-link">
+                    Top 100
+                  </Link>
+                </div>
+              </div>
+
+              {items.length === 0 ? (
+                <div className="catalog-empty-state">
+                  <h2>No {category.title} yet</h2>
+                  <p>Add media to populate this category page.</p>
+                  <Link to="/addmedia" className="catalog-secondary-link">
+                    Add Media
+                  </Link>
+                </div>
+              ) : (
+                <div className="category-grid">
+                  {items.map((item) => (
                     <article className="catalog-card" key={item._id}>
                       <Link to={`/media/${item._id}`} className="catalog-card-media">
                         <img
@@ -101,13 +118,11 @@ function HomePage() {
                     </article>
                   ))}
                 </div>
-              </section>
-            ))
+              )}
+            </>
           )}
         </div>
       </main>
     </div>
   );
 }
-
-export default HomePage;

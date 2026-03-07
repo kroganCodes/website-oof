@@ -11,6 +11,7 @@ import WatchlistPage from './pages/Watchlist';
 import UserReviews from './pages/UserReviews';
 import UserDiscussions from './pages/UserDiscussions';
 import AdminRequests from './pages/AdminRequests';
+import CategoryPage from './pages/CategoryPage';
 import './App.css';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/admin/requests" element={<AdminRequests />} />
             <Route path="/users/:id" element={<Profile />} />
             <Route path="/watchlist" element={<WatchlistPage />} />
+            <Route path="/categories/:categoryKey" element={<CategoryPage />} />
           </Routes>
         </header>
       </div>

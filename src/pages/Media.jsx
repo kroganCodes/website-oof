@@ -264,77 +264,93 @@ function MediaDetail() {
 
   if (media === null) return <div>Media not found.</div>;
 
+  const releaseYear = media.release_date && !Number.isNaN(new Date(media.release_date).getTime())
+    ? new Date(media.release_date).getFullYear()
+    : 'TBA';
+  const averageRating = typeof media.average_rating === 'number'
+    ? media.average_rating.toFixed(1)
+    : 'N/A';
+  const reviewCount = typeof media.total_votes === 'number' ? media.total_votes : reviews.length;
+
   return (
     <>
       <NavBar />
       <div className="media-detail-container">
         <div className="movie-container">
-          <div className="movie-poster">
-            <img src={media.poster} alt={`${media.title} Poster`} className="poster-image" />
-          </div>
-
-          <div className="movie-details">
-            <h1 className="movie-title">{media.title}</h1>
-            <div className="movie-meta">
-              <span className="release-year btn-sm mb-7 px-7 py-8 rounded">{new Date(media.release_date).getFullYear()}</span>
-              <span className="rating">★ {media.average_rating?.toFixed(1) || 'N/A'}/10 - reviews: {media.total_votes}</span>
+          {isAdmin && (
+            <div className="detail-admin-controls">
+              <button onClick={() => setShowEditModal(true)} className="edit-media-btn" title="Edit media">
+                Edit
+              </button>
+              <button onClick={handleDelete} className="delete-media-btn" title="Delete media">
+                Delete
+              </button>
             </div>
-            <div className="movie-info mt-3">
-              <p style={{ fontSize: '0.95rem' }}><strong>Director:</strong> {media.director}</p>
-              <p style={{ fontSize: '0.95rem' }}><strong>Genre:</strong> {media.genre}</p>
+          )}
+
+          <div className="movie-layout">
+            <div className="movie-side-panel">
+              <div className="poster-stat-row">
+                <div className="movie-poster">
+                  <img
+                    src={media.poster || '/logo192.png'}
+                    alt={`${media.title} Poster`}
+                    className="poster-image"
+                    onError={(event) => {
+                      event.currentTarget.src = '/logo192.png';
+                    }}
+                  />
+                </div>
+
+                <div className="media-side-actions">
+                  <div className="detail-rating-pill">
+                    {averageRating}/10 <span className="detail-rating-star">☆</span>
+                  </div>
+
+                  <button
+                    onClick={toggleWatchlist}
+                    disabled={watchlistLoading}
+                    className={`detail-watchlist-btn${isInWatchlist ? ' active' : ''}`}
+                  >
+                    {watchlistLoading
+                      ? 'Loading...'
+                      : isInWatchlist
+                        ? 'Watchlisted ✓'
+                        : 'Watchlist +'}
+                  </button>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setShowDiscussion(true)}
+                className="detail-discuss-btn"
+              >
+                Discuss →
+              </button>
             </div>
-            
-            {isAdmin && (
-              <>
-                <button onClick={() => setShowEditModal(true)} className="edit-media-btn" title="Edit media">
-                  Edit
-                </button>
-                <button onClick={handleDelete} className="delete-media-btn" title="Delete media">
-                  ×
-                </button>
-              </>
-            )}
 
-            <button 
-              onClick={toggleWatchlist} 
-              disabled={watchlistLoading}
-              className={`btn btn-sm mb-3 px-3 py-2 rounded me-2 ${
-                isInWatchlist 
-                  ? 'btn btn-outline-warning' 
-                  : 'btn btn-outline-success'
-              }`}
-            >
-              {watchlistLoading 
-                ? 'Loading...' 
-                : isInWatchlist 
-                  ? '📺 In Watchlist' 
-                  : '+ Add to Watchlist'
-              }
-            </button>
+            <div className="movie-details">
+              <h1 className="movie-title">{media.title}</h1>
 
-            <button 
-              onClick={() => setShowDiscussion(true)}
-              className="btn btn-outline-info btn-sm mb-3 px-3 py-2 rounded me-2"
-            >
-              💬 Discuss
-            </button>
+              <div className="movie-info">
+                <p><strong>Director:</strong> {media.director}</p>
+                <p><strong>Genre:</strong> {media.genre}</p>
+                <p><strong>Released:</strong> {releaseYear} • <strong>Reviews:</strong> {reviewCount}</p>
+              </div>
 
-            {userReviewed ? (
-              <button onClick={() => setShowModal(true)}
-                    className="btn btn-secondary btn-sm mb-3 px-3 py-2 rounded">Already Reviewed</button>
-            ) : (
+              <div className="movie-description">
+                <h4>Synopsis</h4>
+                <p>{media.description}</p>
+              </div>
+            </div>
+
+            <div className="movie-action-rail">
               <button
                 onClick={() => setShowModal(true)}
-                className="btn btn-outline-primary btn-sm mb-3 px-3 py-2 rounded"
+                className={`detail-review-btn${userReviewed ? ' reviewed' : ''}`}
               >
-                Add a review...
+                {userReviewed ? 'Reviewed' : 'Review'}
               </button>
-            )}
-            
-            <div className="movie-description">
-              <h4>Synopsis</h4>
-              <br />
-              <p style={{ fontSize: '0.95rem' }}>{media.description}</p>
             </div>
           </div>
         </div>

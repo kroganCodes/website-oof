@@ -63,6 +63,11 @@ function NavBar() {
             </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link nav-link-professional" to="/profile">
+               Dashboard
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link className="nav-link nav-link-professional" to="/watchlist">
                Watchlist
             </Link>
@@ -86,7 +91,7 @@ function NavBar() {
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
-            <button className="btn btn-outline-success btn-sm " type="submit">
+            <button className="btn search-button-professional" type="submit">
                  Search 
             </button>
           </div>
@@ -100,7 +105,7 @@ function NavBar() {
               {username || "Guest"}
             </Link>
           </div>
-          <Link className="btn btn-outline-danger btn-sm" to="/" onClick={handleLogout}>
+          <Link className="logout-button-professional" to="/" onClick={handleLogout}>
             Logout
           </Link>
         </div>

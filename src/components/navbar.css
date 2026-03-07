@@ -1,163 +1,155 @@
-/* Professional Navbar Styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 .professional-navbar {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg, #090606 0%, #130808 100%);
+  border-bottom: 1px solid rgba(171, 25, 25, 0.92);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .navbar-brand-professional {
-  font-weight: 700;
+  color: #d43131 !important;
   font-size: 22px;
-  background: linear-gradient(45deg, #4dabf7, #74c0fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   text-decoration: none !important;
-  transition: all 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 .navbar-brand-professional:hover {
-  transform: scale(1.05);
+  color: #ef5555 !important;
 }
 
 .nav-link-professional {
   position: relative;
-  color: #e0e0e0 !important;
+  color: #f4eded !important;
   font-weight: 500;
-  padding: 8px 16px !important;
-  border-radius: 20px;
-  transition: all 0.3s ease;
+  padding: 6px 10px !important;
+  border-radius: 8px;
   text-decoration: none !important;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .nav-link-professional:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff !important;
-  transform: translateY(-2px);
+  color: #ff6c6c !important;
+  background: rgba(140, 17, 17, 0.16);
 }
 
 .nav-link-professional::before {
   content: '';
   position: absolute;
-  bottom: 0;
   left: 50%;
+  bottom: -4px;
   width: 0;
   height: 2px;
-  background: linear-gradient(45deg, #4dabf7, #74c0fc);
-  transition: all 0.3s ease;
+  background: #c43131;
   transform: translateX(-50%);
+  transition: width 0.2s ease;
 }
 
 .nav-link-professional:hover::before {
-  width: 80%;
+  width: 72%;
 }
 
 .search-container-professional {
-  position: relative;
-  max-width: 400px;
-  min-width: 300px;
+  max-width: 220px;
+  min-width: 170px;
+}
+
+.search-container-professional .input-group {
+  gap: 0.45rem;
 }
 
 .search-input-professional {
-  background: rgba(42, 42, 42, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: #fff !important;
-  border-radius: 25px !important;
-  padding: 8px 20px !important;
-  font-size: 14px !important;
-  transition: all 0.3s ease !important;
-  backdrop-filter: blur(10px);
+  height: 34px;
+  background: #5f4d4d !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+  padding: 0 14px !important;
+  font-size: 12px !important;
 }
 
 .search-input-professional:focus {
-  background: rgba(42, 42, 42, 1) !important;
-  border-color: #4dabf7 !important;
-  box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.1) !important;
+  background: #6d5959 !important;
+  border-color: #c13838 !important;
+  box-shadow: 0 0 0 2px rgba(193, 56, 56, 0.18) !important;
   outline: none !important;
 }
 
 .search-input-professional::placeholder {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: rgba(255, 255, 255, 0.72) !important;
 }
 
 .search-button-professional {
-  background: linear-gradient(45deg, #4dabf7, #74c0fc) !important;
-  border: none !important;
-  color: white !important;
-  border-radius: 25px !important;
-  padding: 8px 16px !important;
-  transition: all 0.3s ease !important;
-  font-weight: 500 !important;
+  min-height: 34px;
+  padding: 6px 12px !important;
+  border-radius: 999px !important;
+  border: 1px solid #b72c2c !important;
+  background: #1e0909 !important;
+  color: #f7efef !important;
+  font-size: 12px !important;
 }
 
 .search-button-professional:hover {
-  background: linear-gradient(45deg, #339af0, #4dabf7) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(77, 171, 247, 0.3);
+  background: #7c1a1a !important;
+  border-color: #d44747 !important;
 }
 
 .user-section-professional {
-  color: #e0e0e0;
-  font-weight: 500;
-  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(181, 48, 48, 0.35);
+  background: rgba(104, 17, 17, 0.32);
+  color: #f4eded;
+  font-size: 13px;
 }
 
 .username-link-professional {
-  color: #4dabf7 !important;
+  color: #ffffff !important;
   font-weight: 600 !important;
   text-decoration: none !important;
-  transition: all 0.3s ease !important;
-  margin-left: 6px;
 }
 
 .username-link-professional:hover {
-  color: #74c0fc !important;
-  text-shadow: 0 0 8px rgba(77, 171, 247, 0.3);
+  color: #ff8a8a !important;
 }
 
 .logout-button-professional {
-  background: linear-gradient(45deg, #dc3545, #e35d6a) !important;
-  border: none !important;
-  color: white !important;
-  border-radius: 20px !important;
-  padding: 6px 18px !important;
-  font-weight: 500 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 16px !important;
+  border-radius: 10px !important;
+  border: 1px solid #c23a3a !important;
+  background: linear-gradient(180deg, #731515 0%, #500e0e 100%) !important;
+  color: #ffffff !important;
   font-size: 13px !important;
   text-decoration: none !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
 }
 
 .logout-button-professional:hover {
-  background: linear-gradient(45deg, #c82333, #dc3545) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-  color: white !important;
+  background: linear-gradient(180deg, #8d1d1d 0%, #651212 100%) !important;
+  color: #ffffff !important;
 }
 
-/* Responsive Design */
 @media (max-width: 992px) {
   .search-container-professional {
-    min-width: 200px;
+    min-width: 150px;
   }
 }
 
 @media (max-width: 768px) {
   .navbar-brand-professional {
-    font-size: 18px;
+    font-size: 19px;
   }
-  
-  .search-container-professional {
-    min-width: 150px;
-  }
-  
+
   .nav-link-professional {
-    padding: 6px 12px !important;
+    padding: 6px 8px !important;
     font-size: 13px;
   }
 }
