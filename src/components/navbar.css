@@ -137,6 +137,109 @@
   color: #ffffff !important;
 }
 
+.recommendation-link-professional {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.recommendation-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.recommendation-modal {
+  width: min(560px, 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(181, 48, 48, 0.55);
+  background: linear-gradient(180deg, #090606 0%, #130808 100%);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  color: #f4eded;
+}
+
+.recommendation-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 8px;
+  border-bottom: 1px solid rgba(181, 48, 48, 0.28);
+}
+
+.recommendation-modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f4eded;
+}
+
+.recommendation-close-button {
+  appearance: none;
+  border: 1px solid rgba(181, 48, 48, 0.45);
+  background: rgba(104, 17, 17, 0.32);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 2px 10px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.recommendation-close-button:hover {
+  background: rgba(140, 17, 17, 0.22);
+}
+
+.recommendation-modal-body {
+  padding: 12px 16px 16px;
+}
+
+.recommendation-step {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.recommendation-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.recommendation-option-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(181, 48, 48, 0.35);
+  background: rgba(104, 17, 17, 0.22);
+  color: #f4eded;
+  text-align: left;
+  cursor: pointer;
+}
+
+.recommendation-option-button:hover {
+  background: rgba(140, 17, 17, 0.18);
+  border-color: rgba(193, 56, 56, 0.55);
+}
+
+.recommendation-option-key {
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 28px;
+}
+
+.recommendation-option-text {
+  font-weight: 500;
+}
+
 @media (max-width: 992px) {
   .search-container-professional {
     min-width: 150px;
