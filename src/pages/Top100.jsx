@@ -35,7 +35,7 @@ function Top100Page() {
         <div className="container py-4" style={{ flex: 1, maxWidth: '900px' }}>
           <div className="watchlist-header mb-4">
             <h2 className="mb-1">Top 100 List</h2>
-            <p className="text-muted">Highest rated movies, TV shows, and anime</p>
+            <p className="text-muted">Highest rated movies, TV shows and anime</p>
           </div>
 
           {loading ? (

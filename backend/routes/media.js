@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import Media from '../models/media.model.js';
 import MediaRequest from '../models/mediaRequest.model.js';
 import Rating from '../models/review.model.js';
-import ReviewVote from '../models/reviewVote.model.js'; // Add this import
+import ReviewVote from '../models/reviewVote.model.js'; // Add this import brou
 import { authenticateToken } from '../middleware/authi.js';
 import { optionalAuthenticateToken } from '../middleware/optionalAuth.js';
 import { voteOnReview } from '../controllers/reviewVoteController.js';
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
     const rawGenre = (req.query.genre || '').trim();
     const filter = {};
     if (rawGenre) {
-      // Case-insensitive exact match on genre (stored as canonical enum strings)
+      // Case-insensitive exact match on genre 
       filter.genre = { $regex: `^${escapeRegExp(rawGenre)}$`, $options: 'i' };
     }
 

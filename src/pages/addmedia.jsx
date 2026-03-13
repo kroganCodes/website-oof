@@ -59,7 +59,10 @@ function AddMediaForm() {
         body: JSON.stringify(form),
       });
       
-      if (!res.ok) throw new Error('Failed to submit request');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => null);
+        throw new Error(errorData?.error || errorData?.message || 'Failed to submit request');
+      }
       
       // Different success messages based on admin status
       if (isAdmin) {

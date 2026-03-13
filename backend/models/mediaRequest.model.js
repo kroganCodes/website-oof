@@ -6,8 +6,8 @@ const mediaRequestSchema = new Schema({
   media: { type: String, required: true }, // "Movie" or "TV Show"
   genre: { type: String, required: true },
   director: { type: String, required: true },
-  description: { type: String, required: true },
-  poster: { type: String, required: true },
+  description: { type: String, default: 'Theres nothing here...' },
+  poster: { type: String, default: '' },
   requestedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   status: { 
     type: String, 
